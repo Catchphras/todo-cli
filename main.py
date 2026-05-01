@@ -90,22 +90,20 @@ def save_tasks():
 
 def mark_as_complete():
     """Marks a task as complete"""
-    completed_task = input("\nMark which task as complete: ")
-    completed_task = completed_task.lower().strip()
+    completed_task = input("\nMark which task as complete(Use the number attached to the task): ")
+    # completed_task = completed_task.lower().strip()
     
     processed_json = json_loader()
     for second_dict in processed_json.values():
         for l in second_dict.values():
-            if completed_task in l:
-                completed_tasks.append(completed_task)
+                completed_task = int(completed_task)
                 l=list(l)
-                l.remove(completed_task)
+                x = l.pop(completed_task)
+                completed_tasks.append(x)
                 l_ist = l
                 second_dict={'tasks':l_ist}
-                print(f"{completed_task.title()}: Marked as complete.")
-                
-            else:
-                print("Task to mark as complete is not found.")    
+                print(f"{x.title()}: Marked as complete.")
+       
     return second_dict,completed_tasks
 
 def save_marked_as_complete():
